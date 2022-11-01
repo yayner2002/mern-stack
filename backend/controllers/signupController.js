@@ -1,11 +1,17 @@
 const User = require('../models/userModel')
+const bcrypt = require('bcrypt');
 
-const create_user = (req, res) => {
+
+const  create_user = async (req, res) => {
+  const saltPassword = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(req.body.password, saltPassword)
+
+
   const user = new User({
     fullname: req.body.fullname,
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password
+    password: hashedPassword
   })
 
   user.save().then((result) => {
