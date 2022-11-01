@@ -1,10 +1,55 @@
+import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hi</h1>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fullname: "",
+      username: "",
+      email: "",
+      password: "",
+    };
+  }
+
+  render() {
+    return <div>
+      <div className="container">
+        
+      <div className="form-div">
+        <form>
+          <h3>Register Here</h3>
+          
+          <div className="mb-3">
+            <label for="exampleInputEmail1" className="form-label">Full Name</label>
+            <input type ="text" className="form-control" id="exampleInputEmail1" onChange={this.changeFullname} value={this.state.fullname} aria-describedby="emailHelp" name="fullname" />
+            <div id="emailHelp" className="form-text">We'll never share your fullname with anyone else.</div>
+          </div>
+        
+          <div className="mb-3">
+            <label for="exampleInputEmail1" className="form-label">Username</label>
+            <input type ="text" className="form-control" id="exampleInputEmail1" onChange={this.changeUsername} value={this.state.username} aria-describedby="emailHelp" name="username" />
+            <div id="emailHelp" className="form-text">We'll never share your username with anyone else.</div>
+          </div>
+
+          <div className="mb-3">
+            <label for="exampleInputEmail1" className="form-label">Email</label>
+            <input type ="email" className="form-control" id="exampleInputEmail1" onChange={this.changeEmail} value={this.state.email} aria-describedby="emailHelp" name="email" />
+            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          </div>
+
+          <div className="mb-3">
+            <label for="exampleInputEmail1" className="form-label">Password</label>
+            <input type ="password" className="form-control" id="exampleInputEmail1" onChange={this.changePassword} value={this.state.password} aria-describedby="emailHelp" name="password" />
+            <div id="emailHelp" className="form-text">We'll never share your password with anyone else.</div>
+          </div>
+
+          <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+        </div>
+      </div>
+    </div>;
+  }
 }
 
 export default App;
