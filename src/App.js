@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from 'axios'
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +11,60 @@ class App extends Component {
       email: "",
       password: "",
     };
+    this.changeFullname = this.changeFullname.bind(this)
+    this.changeEmail = this.changeEmail.bind(this)
+    this.changeUsername = this.changeUsername.bind(this)
+    this.changePassword = this.changePassword.bind(this)
+
+
+
+  }
+
+  changeEmail(e) {
+    this.setState({
+      email: e.target.value
+    })
+  }
+
+  changeUsername(e) {
+    this.setState({
+      username: e.target.value
+    })
+  }
+
+  changePassword(e) {
+    this.setState({
+      password: e.target.value
+    })
+  }
+
+  changeFullname(e) {
+    this.setState({
+      fullname: e.target.value
+    })
+  }
+
+  onSubmit(e) {
+    e.preventDefault()
+    const endPoint = 'http://localhost:4000/api/signup'
+
+    const userData = {
+      fullname: this.state.fullname,
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    }
+
+    axios.post(`${endPoint}`, userData)
+    .then((response) => console.log(response.data))
+    .catch((err) => console.log(err))
+
+    this.setState({
+      fullname: '',
+      username: '',
+      email: '',
+      password: ''
+    })
   }
 
   render() {
@@ -17,9 +72,9 @@ class App extends Component {
       <div className="container">
         
       <div className="form-div">
-        <form>
+        <form onSubmit={this.onSubmit}>
           <h3>Register Here</h3>
-          
+
           <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label">Full Name</label>
             <input type ="text" className="form-control" id="exampleInputEmail1" onChange={this.changeFullname} value={this.state.fullname} aria-describedby="emailHelp" name="fullname" />
